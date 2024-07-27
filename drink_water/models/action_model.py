@@ -9,5 +9,5 @@ class Action(BaseModel):
         ("DRINK WATER","DRINK WATER")
     }
     user = models.ForeignKey(User, on_delete=models.CASCADE, db_index=True)
-    action = models.CharField(choices=POSSIBLE_ACTIONS, default="DRINK WATER", db_index=True)
+    action = models.CharField(choices=POSSIBLE_ACTIONS, default="DRINK WATER", max_length=30, db_index=True)
     quantity = models.FloatField()
