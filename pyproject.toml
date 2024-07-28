@@ -23,10 +23,20 @@ lint = "ruff ."
 [tool.ruff]
 target-version = "py311"
 line-length = 120
+exclude = ["core/", "manage.py", "migrations/", "*tests.py"]
 
 [tool.black]
 line-length = 120
 target-version = ["py311"]
+exclude = '''
+/(
+    core/
+    drink_water/
+    | \.migrations
+    manage.py
+    *tests.py
+)/
+'''
 
 [build-system]
 requires = ["poetry-core"]
