@@ -10,7 +10,7 @@ class UserActionSerializer(serializers.ModelSerializer):
 
     def validate_action(self, action: str) -> str:
         possible_actions_list = UserAction.POSSIBLE_ACTIONS
-        if not action in possible_actions_list:
+        if action not in possible_actions_list:
             raise serializers.ValidationError(f"Invalid action. Allowed actions are: ({', '.join(possible_actions_list)})")
         return action
 

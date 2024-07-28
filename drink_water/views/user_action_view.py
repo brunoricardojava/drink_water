@@ -18,7 +18,7 @@ class UserActionView(APIView):
                 return Response(serializer.data, status= status.HTTP_201_CREATED)
             else:
                 return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
-        except:
+        except Exception:
             return Response({}, status= status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def get(self, request: Request, user_id: int) -> Response:
@@ -38,5 +38,5 @@ class UserActionView(APIView):
             error_message = f"User with id: {user_id}, does not exist."
             error_response = {"detail": error_message}
             return Response(error_response, status= status.HTTP_404_NOT_FOUND)
-        except Exception as error:
+        except Exception:
             return Response({}, status= status.HTTP_500_INTERNAL_SERVER_ERROR)

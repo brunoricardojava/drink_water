@@ -14,5 +14,5 @@ class UserCreateView(APIView):
                 return Response(serializer.data, status= status.HTTP_201_CREATED)
             else:
                 return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
-        except:
+        except Exception:
             return Response({}, status= status.HTTP_500_INTERNAL_SERVER_ERROR)
