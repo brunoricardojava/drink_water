@@ -3,12 +3,15 @@ from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from drink_water.serializers import UserSerializer
+from drink_water.models import User
+from drink_water.serializers import UserActionSerializer
 
-class UserCreateView(APIView):
-    def post(self, request: Request) -> Response:
+
+class ActionCreateView(APIView):
+    def post(self, request: Request, user_id: int) -> Response:
         try:
-            serializer = UserSerializer(data={**request.data.copy()})
+            data = {"user": user_id, **request.data.copy()}
+            serializer = UserActionSerializer(data= data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status= status.HTTP_201_CREATED)
