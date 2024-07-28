@@ -19,5 +19,5 @@ class UserGoalsView(APIView):
                 return Response(error_response, status= status.HTTP_404_NOT_FOUND)
             else:
                 return Response(user_goal_entity.model_dump(), status= status.HTTP_200_OK)
-        except Exception as error:
-            return Response({error.detail}, status= status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception:
+            return Response({}, status= status.HTTP_500_INTERNAL_SERVER_ERROR)
