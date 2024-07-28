@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 django = "~4.2"
 djangorestframework = "~3.15.2"
+pydantic = "~2.8.2"
 
 
 [build-system]
