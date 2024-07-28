@@ -4,5 +4,5 @@ from .base_model import BaseModel
 
 
 class User(BaseModel):
-    name = models.CharField(max_length=50)
-    weight = models.FloatField(null=True, blank=True)
+    name = models.CharField(max_length=50, db_index=True)
+    weight = models.FloatField()
