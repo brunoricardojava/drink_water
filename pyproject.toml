@@ -16,6 +16,7 @@ pydantic = "~2.8.2"
 ruff = "^0.5.5"
 black = "^24.4.2"
 taskipy = "^1.13.0"
+pytest = "^8.3.2"
 
 [tool.poetry.scripts]
 format = "black ."
