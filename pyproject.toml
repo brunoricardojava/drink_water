@@ -31,7 +31,6 @@ target-version = ["py311"]
 exclude = '''
 /(
     \.venv
-    | ^manage\.py$
     | core
     | drink_water/migrations
     | .*tests\.py
