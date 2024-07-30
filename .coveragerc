@@ -1,0 +1,16 @@
+[report]
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:
+    if settings.DEBUG
+
+[run]
+source = 
+    application
+    drink_water
+omit =
+    core/*
+    *_init__.py
+    drink_water/migrations/*
+    manage.py
+    tests/*

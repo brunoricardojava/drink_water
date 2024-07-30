@@ -17,6 +17,15 @@ ruff = "^0.5.5"
 black = "^24.4.2"
 taskipy = "^1.13.0"
 pytest = "^8.3.2"
+pytest-django = "^4.8.0"
+coverage = "^7.6.0"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "core.settings"
+python_files = [
+    "test_*.py",
+    "*_test.py"
+]
 
 [tool.poetry.scripts]
 format = "black ."

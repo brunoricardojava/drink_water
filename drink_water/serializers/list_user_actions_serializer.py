@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from lib.use_cases import ListUserActionsUseCase
-from lib.entities import ListUserActionsEntity
+from application.use_cases import ListUserActionsUseCase
+from application.entities import ListUserActionsEntity
 
 
 class ListUserActionsSerializer(serializers.Serializer):
