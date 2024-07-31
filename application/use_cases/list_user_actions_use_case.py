@@ -36,7 +36,7 @@ class ListUserActionsUseCase:
         if start_date and end_date:
             return Q(created_at__range=[start_date, end_date])
         else:
-            return Q(created_at__date=self.today)
+            return Q()
 
     @staticmethod
     def _and_concat_specifications(conditions=None):

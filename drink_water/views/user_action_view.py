@@ -34,9 +34,5 @@ class UserActionView(APIView):
                 return paginator.get_paginated_response(serializer.data)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except User.DoesNotExist:
-            error_message = f"User with id: {user_id}, does not exist."
-            error_response = {"detail": error_message}
-            return Response(error_response, status=status.HTTP_404_NOT_FOUND)
         except Exception:
             return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
