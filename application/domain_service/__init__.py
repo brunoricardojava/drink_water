@@ -1,3 +1,3 @@
-from .check_user_goals import CheckUserGoals
+from .check_user_goals_service import CheckUserGoalsService
 
-__all__ = ["CheckUserGoals"]
+__all__ = ["CheckUserGoalsService"]

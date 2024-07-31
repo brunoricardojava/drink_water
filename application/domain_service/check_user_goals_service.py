@@ -7,13 +7,20 @@ from application.entities import UserGoalEntity
 from drink_water.models import User, UserAction
 
 
-class CheckUserGoals:
-    def __init__(self, user_id: int, action: str) -> None:
+class CheckUserGoalsService:
+    def __init__(
+            self,
+            user_id: int,
+            action: str,
+            goal: float = None,
+            total: float = None,
+            complete: bool = None
+        ) -> None:
         self.user_id = user_id
         self.action = action
-        self.goal = None
-        self.total = None
-        self.complete = None
+        self.goal = goal
+        self.total = total
+        self.complete = complete
         self.today = timezone.now().date()
 
     def execute(self) -> UserGoalEntity:
@@ -34,7 +41,7 @@ class CheckUserGoals:
     def _calculate_total(self) -> None:
         total_quantity_today = (
             UserAction.objects.annotate(date=TruncDate("created_at"))
-            .filter(user_id=self.user_id, date=self.today)
+            .filter(user_id=self.user_id, action=self.action, date=self.today)
             .aggregate(total=Sum("quantity"))
         )
         total = total_quantity_today.get("total")
