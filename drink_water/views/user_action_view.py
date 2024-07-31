@@ -4,7 +4,6 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.pagination import LimitOffsetPagination
 
-from drink_water.models import User
 from drink_water.serializers import UserActionSerializer, ListUserActionsSerializer
 
 

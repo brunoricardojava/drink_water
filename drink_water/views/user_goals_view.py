@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from application.use_cases import UserGoalUseCase
 
 from drink_water.serializers import UserGoalsSerializer
-from drink_water.models import User
 
 
 class UserGoalsView(APIView):
