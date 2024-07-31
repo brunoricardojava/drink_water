@@ -1,15 +1,25 @@
 import pytest
+from datetime import datetime
 from django.utils import timezone
 
-from drink_water.models import User
 
+@pytest.mark.django_db
+class TestBaseModel:
+    """Test base model"""
 
-class TestModelUser:
-    """Test model User"""
+    NOW = timezone.now()
 
-    @pytest.mark.django_db()
-    def test_base_model_created_at(self):
-        instance = User.objects.create(name="Test", weight=75)
-        assert instance.created_at is not None
-        assert instance.updated_at is not None
-        assert instance.created_at <= timezone.now()
+    def test_created_at_auto_now_add(self, fixture_user_model):
+        user_model = fixture_user_model
+
+        assert isinstance(user_model.created_at, datetime)
+        assert user_model.created_at > self.NOW
+
+    def test_update_at_auto_now(self, fixture_user_model):
+        user_model = fixture_user_model
+        user_model.name = "Updated Name"
+        user_model.save()
+
+        assert user_model.name == "Updated Name"
+        assert isinstance(user_model.updated_at, datetime)
+        assert user_model.updated_at > user_model.created_at
