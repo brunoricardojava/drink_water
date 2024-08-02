@@ -19,6 +19,9 @@ def fixture_user_action_model(fixture_user_model) -> UserAction:
 def fixture_user_goal_entity_completed() -> UserGoalEntity:
     return UserGoalEntity(action="DRINK WATER", user_goal=100, total_quantity=120, is_complete_goal=True)
 
+@fixture
+def fixture_user_goal_entity_not_completed() -> UserGoalEntity:
+    return UserGoalEntity(action="DRINK WATER", user_goal=100, total_quantity=70, is_complete_goal=False)
 
 @fixture
 def fixture_valid_user_action_data(fixture_user_model) -> dict:
