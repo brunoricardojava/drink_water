@@ -9,13 +9,8 @@ from drink_water.models import User, UserAction
 
 class CheckUserGoalsService:
     def __init__(
-            self,
-            user_id: int,
-            action: str,
-            goal: float = None,
-            total: float = None,
-            complete: bool = None
-        ) -> None:
+        self, user_id: int, action: str, goal: float = None, total: float = None, complete: bool = None
+    ) -> None:
         self.user_id = user_id
         self.action = action
         self.goal = goal

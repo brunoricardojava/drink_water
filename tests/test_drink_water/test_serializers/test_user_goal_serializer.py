@@ -33,7 +33,14 @@ class TestUserGoalSerializer:
         fixture_valid_user_goal_data["action"] = "Invalid User action"
         serializer = self.serializer_to_test(data=fixture_valid_user_goal_data)
 
-        expected_errors = expected_errors = {"action": [ErrorDetail(string=f"Invalid action. Allowed actions are: ({', '.join(UserAction.POSSIBLE_ACTIONS)})", code="invalid")]}
+        expected_errors = expected_errors = {
+            "action": [
+                ErrorDetail(
+                    string=f"Invalid action. Allowed actions are: ({', '.join(UserAction.POSSIBLE_ACTIONS)})",
+                    code="invalid",
+                )
+            ]
+        }
 
         assert not serializer.is_valid()
         assert serializer.errors == expected_errors

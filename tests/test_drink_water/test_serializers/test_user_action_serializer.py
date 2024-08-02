@@ -22,11 +22,13 @@ class TestUserActionSerializer:
         assert serializer.validated_data.get("quantity") == fixture_valid_user_action_data.get("quantity")
 
     def test_invalid_user(self, fixture_valid_user_action_data, fixture_user_model):
-        user = fixture_user_model
+        fixture_user_model
         fixture_valid_user_action_data["user"] = 100
         serializer = self.serializer_to_test(data=fixture_valid_user_action_data)
 
-        expected_errors = {"user": [ErrorDetail(string="Invalid pk \"100\" - object does not exist.", code="does_not_exist")]}
+        expected_errors = {
+            "user": [ErrorDetail(string='Invalid pk "100" - object does not exist.', code="does_not_exist")]
+        }
 
         assert not serializer.is_valid()
         assert serializer.errors == expected_errors
@@ -37,7 +39,14 @@ class TestUserActionSerializer:
         fixture_valid_user_action_data["action"] = "Invalid User action"
 
         serializer = self.serializer_to_test(data=fixture_valid_user_action_data)
-        expected_erros = {"action": [ErrorDetail(string=f"Invalid action. Allowed actions are: ({', '.join(UserAction.POSSIBLE_ACTIONS)})", code="invalid")]}
+        expected_erros = {
+            "action": [
+                ErrorDetail(
+                    string=f"Invalid action. Allowed actions are: ({', '.join(UserAction.POSSIBLE_ACTIONS)})",
+                    code="invalid",
+                )
+            ]
+        }
 
         assert not serializer.is_valid()
         assert serializer.errors == expected_erros
@@ -48,7 +57,9 @@ class TestUserActionSerializer:
         fixture_valid_user_action_data["quantity"] = -10
 
         serializer = self.serializer_to_test(data=fixture_valid_user_action_data)
-        expected_erros = {"quantity": [ErrorDetail(string="The field quantity must be greater than 0.", code="invalid")]}
+        expected_erros = {
+            "quantity": [ErrorDetail(string="The field quantity must be greater than 0.", code="invalid")]
+        }
 
         assert not serializer.is_valid()
         assert serializer.errors == expected_erros

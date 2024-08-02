@@ -10,6 +10,7 @@ from drink_water.models import UserAction
 
 from application.use_cases import ListUserActionsUseCase
 
+
 @pytest.mark.django_db
 class TestListUserActionsSerializer:
     """Test ListUserActionsSerializer"""
@@ -27,9 +28,9 @@ class TestListUserActionsSerializer:
         data = {"user_id": 100}
         serializer = self.serializer_to_test(data=data)
 
-        expected_errors = {'user_id': [ErrorDetail(string='User with id(100) does not exist.', code='invalid')]}
-        
-        assert serializer.is_valid() == False
+        expected_errors = {"user_id": [ErrorDetail(string="User with id(100) does not exist.", code="invalid")]}
+
+        assert not serializer.is_valid()
         assert serializer.errors == expected_errors
         with pytest.raises(ValidationError):
             assert serializer.is_valid(raise_exception=True)

@@ -21,7 +21,7 @@ class TestCheckUserGoalsService:
         assert return_service.action == "DRINK WATER"
         assert return_service.user_goal == 100
         assert return_service.total_quantity == 80
-        assert return_service.is_complete_goal == False
+        assert not return_service.is_complete_goal
 
     @patch.object(User.objects, "get")
     def test_user_goals_service_correct_calculate_goal(self, mock_user_get):
@@ -53,7 +53,7 @@ class TestCheckUserGoalsService:
 
         instance_service._is_complete()
 
-        assert instance_service.complete == True
+        assert instance_service.complete
 
     def test_user_over_completed_goals(self):
         instance_service = self.service_to_test(1, "DRINK WATER")
@@ -62,7 +62,7 @@ class TestCheckUserGoalsService:
 
         instance_service._is_complete()
 
-        assert instance_service.complete == True
+        assert instance_service.complete
 
     def test_user_not_completed_goals(self):
         instance_service = self.service_to_test(1, "DRINK WATER")
@@ -71,7 +71,7 @@ class TestCheckUserGoalsService:
 
         instance_service._is_complete()
 
-        assert instance_service.complete == False
+        assert not instance_service.complete
 
     def test_user_goals_service_process(self, fixture_user_model):
         user = fixture_user_model
@@ -85,4 +85,4 @@ class TestCheckUserGoalsService:
         assert instance_service.action == "DRINK WATER"
         assert instance_service.goal == user.weight * 35
         assert instance_service.total == user_action_1.quantity + user_action_2.quantity
-        assert instance_service.complete == False
+        assert not instance_service.complete

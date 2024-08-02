@@ -1,8 +1,6 @@
 from application.entities import UserGoalEntity
 from application.domain_service import CheckUserGoalsService
 
-from drink_water.models import UserAction
-
 
 class UserGoalsUseCase:
     def __init__(self, user_id: int, action: str = "DRINK WATER") -> None:
@@ -16,5 +14,4 @@ class UserGoalsUseCase:
         user_goal_entity = self.check_user_goals.execute()
         return user_goal_entity
 
-    def validate(self):
-        ...
+    def validate(self): ...

@@ -9,6 +9,7 @@ from drink_water.views import UserActionView
 from drink_water.models import UserAction
 from drink_water.serializers import UserActionSerializer, ListUserActionsSerializer
 
+
 @pytest.mark.django_db
 class TestUserActionView:
     """Test UserActionView."""
@@ -29,7 +30,9 @@ class TestUserActionView:
         fixture_user_model
         url = reverse("UserActionRoute", kwargs={"user_id": "100"})
         response = self.api_client.post(path=url, data=fixture_valid_user_action_data_for_post_view, format="json")
-        expected_error_response = {"user": [ErrorDetail(string="Invalid pk \"100\" - object does not exist.", code="does_not_exist")]}
+        expected_error_response = {
+            "user": [ErrorDetail(string='Invalid pk "100" - object does not exist.', code="does_not_exist")]
+        }
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data == expected_error_response
@@ -39,7 +42,14 @@ class TestUserActionView:
         fixture_valid_user_action_data_for_post_view["action"] = "Invalid action"
         url = reverse("UserActionRoute", kwargs={"user_id": user.id})
         response = self.api_client.post(path=url, data=fixture_valid_user_action_data_for_post_view, format="json")
-        expected_error_response = {"action": [ErrorDetail(string=f"Invalid action. Allowed actions are: ({', '.join(UserAction.POSSIBLE_ACTIONS)})", code="invalid")]}
+        expected_error_response = {
+            "action": [
+                ErrorDetail(
+                    string=f"Invalid action. Allowed actions are: ({', '.join(UserAction.POSSIBLE_ACTIONS)})",
+                    code="invalid",
+                )
+            ]
+        }
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data == expected_error_response
@@ -49,13 +59,17 @@ class TestUserActionView:
         fixture_valid_user_action_data_for_post_view["quantity"] = -10
         url = reverse("UserActionRoute", kwargs={"user_id": user.id})
         response = self.api_client.post(path=url, data=fixture_valid_user_action_data_for_post_view, format="json")
-        expected_error_response = {"quantity": [ErrorDetail(string=f"The field quantity must be greater than 0.", code="invalid")]}
+        expected_error_response = {
+            "quantity": [ErrorDetail(string="The field quantity must be greater than 0.", code="invalid")]
+        }
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data == expected_error_response
 
     @patch.object(UserActionSerializer, "save")
-    def test_post_internal_server_error(self, mock_serializer_save, fixture_user_model, fixture_valid_user_action_data_for_post_view):
+    def test_post_internal_server_error(
+        self, mock_serializer_save, fixture_user_model, fixture_valid_user_action_data_for_post_view
+    ):
         mock_serializer_save.side_effect = Exception("Error serializer save")
         user = fixture_user_model
         url = reverse("UserActionRoute", kwargs={"user_id": user.id})
@@ -69,7 +83,7 @@ class TestUserActionView:
         url = reverse("UserActionRoute", kwargs={"user_id": user.id})
         response = self.api_client.get(path=url, format="json")
 
-        expected_response = {'count': 0, 'next': None, 'previous': None, 'results': []}
+        expected_response = {"count": 0, "next": None, "previous": None, "results": []}
 
         assert response.status_code == status.HTTP_200_OK
         assert response.data == expected_response
@@ -83,8 +97,8 @@ class TestUserActionView:
 
         assert response.status_code == status.HTTP_200_OK
         assert response.data.get("count") == 2
-        assert response.data.get("next") == None
-        assert response.data.get("previus") == None
+        assert response.data.get("next") is None
+        assert response.data.get("previus") is None
         assert len(response.data.get("results")) == 2
         assert response.data.get("results")[0].get("id") == user_actio_2.id
         assert response.data.get("results")[0].get("user") == user_actio_2.user_id
@@ -97,7 +111,7 @@ class TestUserActionView:
         fixture_user_model
         url = reverse("UserActionRoute", kwargs={"user_id": "100"})
         response = self.api_client.get(path=url, format="json")
-        expected_error_response = {"user_id": [ErrorDetail(string=f"User with id(100) does not exist.", code="invalid")]}
+        expected_error_response = {"user_id": [ErrorDetail(string="User with id(100) does not exist.", code="invalid")]}
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data == expected_error_response

@@ -1,9 +1,10 @@
 import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 from application.use_cases import UserGoalsUseCase
 from application.entities import UserGoalEntity
 from application.domain_service import CheckUserGoalsService
+
 
 @pytest.mark.django_db
 class TestUserGoalsUseCase:
