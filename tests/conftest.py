@@ -31,6 +31,11 @@ def fixture_valid_user_action_data(fixture_user_model) -> dict:
         "user": fixture_user_model.id,
         "action": "DRINK WATER",
         "quantity": 100.0,
-        # "created_at": make_aware(datetime(2024, 8, 1)),
-        # "updated_at": make_aware(datetime(2024, 8, 1)),
+    }
+
+@fixture
+def fixture_valid_user_goal_data(fixture_user_model) -> dict:
+    return {
+        "user_id": fixture_user_model.id,
+        "action": "DRINK WATER",
     }
