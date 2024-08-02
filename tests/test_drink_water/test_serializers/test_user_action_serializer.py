@@ -21,6 +21,18 @@ class TestUserActionSerializer:
         assert serializer.validated_data.get("action") == fixture_valid_user_action_data.get("action")
         assert serializer.validated_data.get("quantity") == fixture_valid_user_action_data.get("quantity")
 
+    def test_invalid_user(self, fixture_valid_user_action_data, fixture_user_model):
+        user = fixture_user_model
+        fixture_valid_user_action_data["user"] = 100
+        serializer = self.serializer_to_test(data=fixture_valid_user_action_data)
+
+        expected_errors = {"user": [ErrorDetail(string="Invalid pk \"100\" - object does not exist.", code="does_not_exist")]}
+
+        assert not serializer.is_valid()
+        assert serializer.errors == expected_errors
+        with pytest.raises(ValidationError):
+            serializer.is_valid(raise_exception=True)
+
     def test_invalid_action_for_user_action(self, fixture_valid_user_action_data):
         fixture_valid_user_action_data["action"] = "Invalid User action"
 

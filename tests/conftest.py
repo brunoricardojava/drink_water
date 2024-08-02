@@ -34,8 +34,29 @@ def fixture_valid_user_action_data(fixture_user_model) -> dict:
     }
 
 @fixture
+def fixture_valid_user_action_data_for_post_view() -> dict:
+    return {
+        "action": "DRINK WATER",
+        "quantity": 100.0,
+    }
+
+@fixture
+def fixture_valid_user_actio_data_for_get_view() -> dict:
+    return {
+        "start_date": ["2024-07-31"],
+        "end_date": ["2024-08-01"],
+    }
+
+@fixture
 def fixture_valid_user_goal_data(fixture_user_model) -> dict:
     return {
         "user_id": fixture_user_model.id,
         "action": "DRINK WATER",
+    }
+
+@fixture
+def fixture_valid_user_data() -> dict:
+    return {
+        "name": "bruno",
+        "weight": 75.0,
     }

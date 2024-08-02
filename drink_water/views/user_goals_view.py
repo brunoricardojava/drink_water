@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from application.use_cases import UserGoalUseCase
+from application.use_cases import UserGoalsUseCase
 
 from drink_water.serializers import UserGoalsSerializer
 
@@ -17,7 +17,7 @@ class UserGoalsView(APIView):
             if serializer.is_valid():
                 user_id = serializer.validated_data.get("user_id")
                 action = serializer.validated_data.get("action")
-                user_goal_entity = UserGoalUseCase(user_id, action).execute()
+                user_goal_entity = UserGoalsUseCase(user_id, action).execute()
                 return Response(user_goal_entity.model_dump(), status=status.HTTP_200_OK)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
