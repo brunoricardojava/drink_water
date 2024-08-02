@@ -1,10 +1,10 @@
 from application.entities import UserGoalEntity
 from application.domain_service import CheckUserGoalsService
 
-from drink_water.models import User
+from drink_water.models import UserAction
 
 
-class UserGoalUseCase:
+class UserGoalsUseCase:
     def __init__(self, user_id: int, action: str = "DRINK WATER") -> None:
         self.user_id = user_id
         self.action = action
@@ -17,8 +17,4 @@ class UserGoalUseCase:
         return user_goal_entity
 
     def validate(self):
-        self._check_user_exist()
-
-    def _check_user_exist(self):
-        if not User.objects.filter(pk=self.user_id).exists():
-            raise User.DoesNotExist()
+        ...

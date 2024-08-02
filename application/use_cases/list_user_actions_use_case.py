@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from application.entities import ListUserActionsEntity
 
-from drink_water.models import UserAction, User
+from drink_water.models import UserAction
 
 
 class ListUserActionsUseCase:
