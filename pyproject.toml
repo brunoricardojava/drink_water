@@ -6,11 +6,12 @@ authors = ["Bruno R. Scherer <brunoricardojava@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "~3.11"
 django = "~4.2"
 djangorestframework = "~3.15.2"
 pydantic = "~2.8.2"
 pytz = "~2024.1"
+gunicorn = "~22.0.0"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -19,7 +19,7 @@ class TestUserView:
         url = reverse(viewname="UserRoute")
         response = self.api_client.post(path=url, data=fixture_valid_user_data, format="json")
 
-        expected_response = {'id': 1, 'name': 'bruno', 'weight': 75.0}
+        expected_response = {"id": 1, "name": "bruno", "weight": 75.0}
 
         assert response.status_code == status.HTTP_201_CREATED
         assert response.data == expected_response
@@ -30,7 +30,7 @@ class TestUserView:
         url = reverse(viewname="UserRoute")
         response = self.api_client.post(path=url, data=fixture_valid_user_data, format="json")
 
-        expected_error = {'weight': [ErrorDetail(string='The field weight must be greater than 0.', code='invalid')]}
+        expected_error = {"weight": [ErrorDetail(string="The field weight must be greater than 0.", code="invalid")]}
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data == expected_error

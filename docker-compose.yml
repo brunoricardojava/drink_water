@@ -1,0 +1,11 @@
+services:
+  web:
+    restart: always
+    build:
+      context: ./
+    image: drink-water
+    ports:
+      - "5001:5001"
+    command: gunicorn core.wsgi:application --timeout 0 --bind 0.0.0.0:5001 --log-level=INFO --reload
+    volumes:
+      - '.:/app'
