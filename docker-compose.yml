@@ -12,3 +12,5 @@ services:
       - '.:/app'
     # command: gunicorn core.wsgi:application --timeout 0 --bind 0.0.0.0:5001 --log-level=INFO --reload
     command: poetry run python manage.py runserver 0.0.0.0:5001
+    stdin_open: true
+    tty: true

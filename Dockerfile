@@ -32,3 +32,8 @@ RUN poetry install --no-root
 
 #Copy project
 COPY . .
+
+RUN chmod +x /app/entrypoint.sh
+RUN chmod +x /app/manage.py
+
+ENTRYPOINT [ "/bin/sh", "/app/entrypoint.sh" ]
