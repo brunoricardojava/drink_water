@@ -2,8 +2,6 @@ ARG PYTHON_VERSION=3.11
 
 FROM python:${PYTHON_VERSION}-alpine
 
-WORKDIR /app
-
 # ---POETRY SETUP---
 ENV POETRY_VERSION=1.7.1
 # Remove a interação do usuario
@@ -12,11 +10,25 @@ ENV POETRY_NO_INTERACTION=true
 ENV POETRY_VIRTUALENVS_CREATE=false
 # Pasta de ambiente virtual não é setado no projeto
 ENV POETRY_VIRTUALENVS_IN_PROJECT=false
-# Diretorio de cache do poetry
-ENV POETRY_CACHE_DIR=/tmp/poetry_cache
 
+#Install  system dependency
+RUN apk add --no-cache \
+    build-base \
+    libffi-dev \
+    openssl-dev \
+    py3-cryptography
+
+#Worker directory
+WORKDIR /app
+
+#Copy dependency files
+COPY pyproject.toml poetry.lock ./
+
+#Install poetry
 RUN pip install poetry==${POETRY_VERSION}
 
-COPY . .
+#Install project dependency
+RUN poetry install --no-root
 
-RUN poetry install --without dev --no-root && rm -rf ${POETRY_CACHE_DIR}
+#Copy project
+COPY . .

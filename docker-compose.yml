@@ -1,11 +1,14 @@
 services:
+
   web:
+    container_name: drink-water-web
     restart: always
     build:
       context: ./
-    image: drink-water
+      dockerfile: Dockerfile
     ports:
       - "5001:5001"
-    command: gunicorn core.wsgi:application --timeout 0 --bind 0.0.0.0:5001 --log-level=INFO --reload
     volumes:
       - '.:/app'
+    # command: gunicorn core.wsgi:application --timeout 0 --bind 0.0.0.0:5001 --log-level=INFO --reload
+    command: poetry run python manage.py runserver 0.0.0.0:5001
