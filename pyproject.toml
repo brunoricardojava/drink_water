@@ -54,6 +54,7 @@ exclude = '''
 black = "black ."
 ruff = "ruff check --fix ."
 lint = "black . && ruff check --fix ."
+test = "pytest"
 coverage = "coverage run -m pytest && coverage html"
 
 [build-system]
