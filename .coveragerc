@@ -10,7 +10,7 @@ source =
     drink_water
 omit =
     core/*
-    *_init__.py
+    *__init__.py
     drink_water/migrations/*
     manage.py
     tests/*
