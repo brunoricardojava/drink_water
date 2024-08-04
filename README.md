@@ -1,49 +1,49 @@
 # Drink Water
 
-Projeto desenvolvimedo com o intuito de lembrar de beber agua.
+Project developed with the intention of reminding you to drink water.
 
-## Sumário
+## Table of Contents
 
-- [Pré-requisitos](#pré-requisitos)
-- [Instalação](#instalação)
-- [Execução](#execução)
-- [Testes](#testes)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running](#running)
+- [Testing](#testing)
 
-## Pré-requisitos
+## Prerequisites
 
 - Docker
 
-## Instalação
+## Installation
 
-1. Clone o repositório:
+1. Clone the repository:
 
     ```bash
     git clone https://github.com/brunoricardojava/drink_water.git
     cd drink_water
     ```
 
-## Execução
+## Running
 
-1. Suba o container da aplicação
+1. Start the application container
 
     ```bash
     docker compose up
     ```
 
-A aplicação estará disponível em [http://0.0.0.0:5001/](http://0.0.0.0:5001/).
+The application will be available at [http://0.0.0.0:5001/](http://0.0.0.0:5001/).
 
-## Testes
+## Testing
 
-1. Para rodar os testes, use:
+1. To run the tests, use:
 
     ```bash
     docker compose exec web poetry run task test
     ```
 
-2. Para verificar a cobertura de testes, use:
+2. To check the test coverage, use:
 
     ```bash
     docker compose exec web poetry run task coverage
     ```
 
-Podera acessar o relatorio de cobertura dos testes em project-path/htmlcov/index.html
+You can access the test coverage report at project-path/htmlcov/index.html
