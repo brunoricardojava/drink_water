@@ -11,7 +11,7 @@ Project developed with the intention of reminding you to drink water.
 
 ## Prerequisites
 
-- Docker
+- Docker (https://docs.docker.com/engine/install/)
 
 ## Installation
 
