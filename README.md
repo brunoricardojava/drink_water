@@ -35,8 +35,11 @@ The application will be available at [http://0.0.0.0:5001/](http://0.0.0.0:5001/
 ENDPOINTS:
 
 [POST] /api/v1/user
+
 [POST] /api/v1/user/<user_id>/action
+
 [GET] /api/v1/user/<user_id>/action
+
 [GET] /api/v1/user/<user_id>/goal
 
 ## Testing
