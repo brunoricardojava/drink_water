@@ -36,6 +36,8 @@ ENDPOINTS:
 
 [POST] /api/v1/user
 
+[PUT] /api/v1/user/<user_id>
+
 [POST] /api/v1/user/<user_id>/action
 
 [GET] /api/v1/user/<user_id>/action
