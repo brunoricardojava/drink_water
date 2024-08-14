@@ -6,7 +6,7 @@ from drink_water.models import UserAction
 class UserActionSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAction
-        exclude = ["created_at", "updated_at"]
+        exclude = ["updated_at"]
 
     def validate_action(self, action: str) -> str:
         possible_actions_list = UserAction.POSSIBLE_ACTIONS

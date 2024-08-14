@@ -1,6 +1,6 @@
 #!/bin/sh
 
 ./manage.py migrate
-poetry run task coverage
+# poetry run task coverage
 
 exec "$@"

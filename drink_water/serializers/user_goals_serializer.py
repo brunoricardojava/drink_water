@@ -3,9 +3,12 @@ from rest_framework import serializers
 from drink_water.models import User, UserAction
 
 
+AVAILABLE_GOALS_PERIOD = ["day", "week", "month", "year"]
+
 class UserGoalsSerializer(serializers.Serializer):
     user_id = serializers.IntegerField()
     action = serializers.CharField(required=False)
+    period = serializers.CharField(required=False)
 
     def validate_user_id(self, user_id: int) -> int:
         if not User.objects.filter(pk=user_id).exists():
@@ -19,3 +22,10 @@ class UserGoalsSerializer(serializers.Serializer):
                 f"Invalid action. Allowed actions are: ({', '.join(possible_actions_list)})"
             )
         return action
+
+    def validate_period(self, period: str) -> str:
+        if period not in AVAILABLE_GOALS_PERIOD:
+            raise serializers.ValidationError(
+                f"Invalid period. Allowed actions are: ({', '.join(AVAILABLE_GOALS_PERIOD)})"
+            )
+        return period
