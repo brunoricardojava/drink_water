@@ -6,7 +6,7 @@ from django.db.models import Sum
 
 from application.entities import UserGoalEntity, UserGoalEntityList
 
-from drink_water.models import User, UserAction
+from drink_water.models import User, UserAction, UserDataHistory
 
 
 class CheckUserGoalsService:
@@ -27,7 +27,7 @@ class CheckUserGoalsService:
 
         for day in range(days_number):
             date = self.today - timedelta(days=day)
-            goal = self._calculate_goal()
+            goal = self._calculate_goal(date)
             total = self._calculate_total(date)
             completed = self._is_complete(total, goal)
             user_goal_entity = UserGoalEntity(date=date, action=self.action, user_goal=goal, total_quantity=total, is_complete_goal=completed)
@@ -39,12 +39,22 @@ class CheckUserGoalsService:
         definition = {"day": 1, "week": 7, "month": 30}
         return definition.get(self.period)
 
-    def _calculate_goal(self) -> float:
-        user_weight = self._get_user_weight()
+    def _calculate_goal(self, date) -> float:
+        user_weight = self._get_user_weight(date)
         return user_weight * 35
 
-    def _get_user_weight(self) -> float:
-        return User.objects.get(pk=self.user_id).weight
+    def _get_user_weight(self, date) -> float:
+        # date = date + timedelta(days=1)
+        user_history = (
+            UserDataHistory.objects.annotate(date=TruncDate("created_at"))
+            .filter(user_id=self.user_id, date=date)
+            .order_by("-created_at").first()
+        )
+        if not user_history:
+            weight = User.objects.get(pk=self.user_id).weight
+        else:
+            weight = user_history.weight
+        return weight
 
     def _calculate_total(self, date: date) -> float:
         total_quantity_today = (
